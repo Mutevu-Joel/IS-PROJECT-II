@@ -1,0 +1,59 @@
+{% extends 'partials/base.html' %}
+{% block title %}Children Page{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'partials/topside.html' %}
+    <!--Table-->
+    <div class="container">
+            <div class="col-md-8">
+                <table class="table bg-white">
+                    <thead class="bg-info">
+                        <tr class="text-white">
+                            <th scope="col">#</th>
+                    <th scope="col">Parent Id</th>
+                    <th scope="col">Mobile Number</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Other Name</th>
+                    <th scope="col">Sex</th>
+                    <th scope="col">Date of Birth</th>
+                    <th scope="col">Village</th>
+                    <th scope="col">Ward</th>
+                    <th scope="col">Pre-Condition</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in item %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                    <td>{{ item.parent_id}}</td>
+                    <td>{{ item.mobile_no}}</td>
+                     <td>{{ item.surname }}</td>
+                    <td>{{ item.other_name }}</td>
+                    <td>{{ item.sex }}</td>
+                    <td>{{ item.dob }}</td>
+                    <td>{{ item.village }}</td>
+                    <td>{{ item.ward }}</td>
+                    <td>{{ item.pre_condition }}</td>
+
+                           
+                            <td>
+                                {% if user.is_authenticated and user.is_staff and user.is_superuser %}
+                                <a class="btn btn-info btn-sm" href="{% url 'childedit' item.parent_id %}">Edit</a>
+                                <a class="btn btn-info btn-danger" href="{% url 'childdelete' item.parent_id %}">Delete</a>
+
+                                {% endif%}
+                            </td>
+                            
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+{% endblock %}

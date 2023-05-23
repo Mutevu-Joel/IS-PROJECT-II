@@ -1,0 +1,40 @@
+{% extends 'partials/base.html' %}
+{% block title %}Child Registration Page{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'partials/topside.html' %}
+    <!--Table-->
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-md-6 offset-md-3">
+                {% if messages %}
+            {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+                <div class="border bg-white p-3">
+                    <h4>Registration</h4>
+                    {% if user.is_authenticated and user.is_staff and user.is_superuser %}
+                     <a class="btn btn-info btn-sm" href="{% url 'adminchildview' %}">View</a>
+
+                     {% endif %}
+                    <a class="btn btn-info btn-sm" href="{% url 'clinic' %}">Clinic</a>
+                    <hr>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy}}
+                        
+
+                         <input class="btn btn-success btn-block" type="submit" value="Add Child">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

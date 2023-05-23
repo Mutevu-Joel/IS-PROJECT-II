@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Show Info</title>
+  </head>
+  <body>
+    <h1>Show Info</h1>
+        
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                <th scope="col">child Registration</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Other Name</th>
+                <th scope="col">weight</th>
+                <th scope="col">sex</th>
+                <th scope="col">height</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Parent Id</th>
+                <th scope="col">Phone No</th>
+                <th scope="col">ward</th>
+                <th scope="col">Underlying condition</th>
+                <th scope="col">vaccine type</th>
+                <th scope="col">Batch no</th>
+                <th scope="col">Dose No</th>
+                <th scope="col">immunized at</th>
+                <th scope="col">immunization description</th>
+                <th scope="col">Return Date</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                     {% for child in myFilter.qs %}
+
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                <td>{{ child.child_registration_no }}</td>
+                 <td>{{ child.parent_id.surname }}</td>
+                <td>{{ child.parent_id.other_name }}</td>
+                <td>{{ child.weight }}</td>
+                <td>{{ child.parent_id.sex }}</td>
+                <td>{{ child.height }}</td>
+                <td>{{ child.parent_id.dob }}</td>
+                <td>{{ child.parent_id }}</td>
+                <td>{{ child.parent_id.mobile_no }}</td>
+                <td>{{ child.parent_id.ward }}</td>
+                <td>{{ child.parent_id.pre_condition }}</td>
+                <td>{{ child.vaccine_id }}</td>
+                <td>{{ child.vaccine_id.batch_no }}</td>
+                <td>{{ child.dose_no}}</td>
+                <td>{{ child.immunized_at }}</td>
+                <td>{{ child.comment}}</td>
+                <td>{{ child.return_date }}</td>
+                        </tr>
+
+                      {% endfor %}
+                     
+                    </tbody>
+                  </table>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  </body>
+</html>

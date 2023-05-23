@@ -1,0 +1,69 @@
+{% extends 'partials/base.html' %}
+{% block title %}Vaccine Page{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'partials/topside.html' %}
+    <!--Table-->
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-md-4">
+                {% if messages %}
+            {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+
+                <div class="border bg-danger p-3">
+                    <h4>Add Vaccines</h4>
+                    <hr>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy}}
+
+                         <input class="btn btn-success btn-block" type="submit" value="Add Vaccine">
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <table class="table bg-white">
+                    <thead class="bg-info">
+                        <tr class="text-white">
+                            <th scope="col">#</th>
+                            <th scope="col">Vaccine ID</th>
+                            <th scope="col">Mode of Admission</th>
+                            <th scope="col">Batch No</th>
+                            <th scope="col">Vaccine Quantity</th>
+                            <th scope="col">Expiry date</th>
+                            <th scope="col">Activity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <th scope="row"></th>
+                            <td>{{ item.vaccine_id }}</td>
+                             <td>{{ item.mode_of_admission }}</td>
+                            <td>{{ item.batch_no}}</td>
+                            <td>{{ item.vaccine_quantity }}</td>
+                            <td>{{ item.expiry_date }}</td>
+                            
+
+                            <td>
+                                <a class="btn btn-info btn-sm" href="{% url 'vaccine_edit' item.id %}">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="{% url 'vaccine_delete' item.id %}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

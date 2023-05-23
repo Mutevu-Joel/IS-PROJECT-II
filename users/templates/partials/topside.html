@@ -1,0 +1,54 @@
+
+<div class = " container">
+        <div class = "row mt-4">
+          <div class = "col-md-4">
+            <div class = "card">
+              <div class = " card-header bg-info">
+                Information
+              </div>
+              <div class = "card-body">
+                <marquee behavior = "" direction="">
+                  <h3 class ="my-3">Welcome to KSCH Dashboard</h3>
+                </marquee>
+              </div>
+            </div>
+          </div>
+          <div class = "col-md-8">
+            <div class = "card">
+              <div class = " card-header bg-info text-white">
+                Statistics
+              </div>
+              {% if user.is_authenticated and user.is_staff and user.is_superuser %}
+              <div class = "card-body">
+                <div class =" row">
+                  <div class = "com-md-4 p-3">
+                    <a class = "text-decoration-none text-dark" href="{% url 'staff' %}">
+                    <div class = "card my-card shadow text-center p-3">
+                      <h4>Staff <i class="fa-sharp fa-solid fa-users"></i> </h4>
+                      <h3>{{ staff_count }}</h3>
+                    </div>
+                      </a>
+                  </div>
+                  {% endif%}
+                  <div class = "com-md-4 p-3">
+                    <a class = "text-decoration-none text-dark" href="{% url 'vaccine' %}">
+                    <div class = "card my-card shadow text-center p-3">
+                      <h4>Vaccines <i class="fa-solid fa-syringe"></i> </h4>
+                      <h3>{{ vaccine_count }}</h3>
+                    </div>
+                      </a>
+                  </div>
+                  <div class = "com-md-4 p-3">
+                    <a class = "text-decoration-none text-dark" href="{% url 'childRegistration' %}">
+                    <div class = "card my-card shadow text-center p-3">
+                      <h4>Immunization <i class="fa-solid fa-children"></i> </h4>
+                      <h3>{{ child_count }}</h3>
+                    </div>
+                      </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

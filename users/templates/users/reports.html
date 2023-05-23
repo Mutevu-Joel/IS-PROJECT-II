@@ -1,0 +1,116 @@
+{% extends 'partials/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    
+        <div class="col-md-13 offset-mr-4">
+
+            <div class="border bg-white p-3">
+                <h4>Filter</h4>
+                <div class="row">
+	        <div class="col">
+		    <div class="card card-body">
+
+			<form method="get">
+				{{myFilter.form}}
+
+
+		    <button class="btn btn-primary" type="submit">Filter</button>
+
+
+
+		</div>
+                <a class="btn btn-primary m-2" href="{% url 'create-pdf' %}">Create PDF</a>
+	</div>
+	
+</div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    <table class="table bg-white float-start">
+        <thead class="bg-info">
+            <tr class="text-white">
+                <th scope="col">#</th>
+                <th scope="col">child Registration</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Other Name</th>
+                <th scope="col">weight</th>
+                <th scope="col">sex</th>
+                <th scope="col">height</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Parent Id</th>
+                <th scope="col">Phone No</th>
+                <th scope="col">ward</th>
+                <th scope="col">Underlying condition</th>
+                <th scope="col">vaccine type</th>
+                <th scope="col">Batch no</th>
+                <th scope="col">Dose No</th>
+                <th scope="col">immunized at</th>
+                <th scope="col">immunization description</th>
+                <th scope="col">Return Date</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for child in myFilter.qs %}
+
+            <tr>
+                
+                <td>{{ forloop.counter }}</td>
+                <td>{{ child.child_registration_no }}</td>
+                 <td>{{ child.parent_id.surname }}</td>
+                <td>{{ child.parent_id.other_name }}</td>
+                <td>{{ child.weight }}</td>
+                <td>{{ child.parent_id.sex }}</td>
+                <td>{{ child.height }}</td>
+                <td>{{ child.parent_id.dob }}</td>
+                <td>{{ child.parent_id }}</td>
+                <td>{{ child.parent_id.mobile_no }}</td>
+                <td>{{ child.parent_id.ward }}</td>
+                <td>{{ child.parent_id.pre_condition }}</td>
+                <td>{{ child.vaccine_id }}</td>
+                <td>{{ child.vaccine_id.batch_no }}</td>
+                <td>{{ child.dose_no}}</td>
+                <td>{{ child.immunized_at }}</td>
+                <td>{{ child.comment}}</td>
+                <td>{{ child.return_date }}</td>
+                <td>
+                    {% if user.is_authenticated and user.is_staff and user.is_superuser %}
+                       <a class="btn btn-info btn-sm" href="{% url 'parentedit' child.child_registration_no %}">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'childdelete2' child.child_registration_no %}">Delete</a>
+                    {% endif %}
+
+
+                    </td>
+                
+        
+            </tr>
+            {% endfor %}
+
+
+
+            <script>
+                $( function() {
+                    $( "#datepicker" ).datepicker();
+                } );
+                </script> 
+
+        </tbody>
+    </table>
+
+
+            
+
+
+
+{% endblock %}
+
+
+
